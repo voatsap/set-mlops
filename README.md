@@ -17,7 +17,7 @@ mlops/
 We use **Label Studio** ([heartexlabs/label-studio](https://github.com/heartexlabs/label-studio)) for image annotation.  
 Label Studio is a flexible, open-source data labeling tool that supports a wide range of data types and integrates seamlessly with cloud storage.
 
-![Label Studio Interface](docs/images/label-studio-interface.png)
+![Label Studio Interface](docs/images/label-studio-inerface.png)
 
 ## How to Launch the Annotation Platform
 

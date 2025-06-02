@@ -1,4 +1,4 @@
 # Ignore MinIO storage data
-minio-data/
-minio-data/.minio*
+minio-data/*
+!minio-data/yacht-dataset.dvc
 

@@ -1,0 +1,8 @@
+[core]
+    remote = yacht-s3
+['remote "yacht-s3"']
+    url = s3://yacht-dvc-storage/yacht-dataset
+    endpointurl = http://localhost:9000
+    access_key_id = minioadmin
+    secret_access_key = minioadmin
+    use_ssl = false

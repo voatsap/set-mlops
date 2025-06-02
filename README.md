@@ -19,6 +19,40 @@ Label Studio is a flexible, open-source data labeling tool that supports a wide 
 
 ![Label Studio Interface](docs/images/label-studio-inerface.png)
 
+## Dataset Versioning with DVC
+
+We use [DVC (Data Version Control)](https://dvc.org/) to version and manage our dataset:
+
+- **Source dataset:** `minio-data/yacht-dataset`
+- **Remote storage:** MinIO S3-compatible bucket `yacht-dvc-storage`
+
+**How to use DVC for dataset versioning:**
+
+```sh
+# Initialize DVC (run once)
+dvc init
+
+# Track the dataset directory
+dvc add minio-data/yacht-dataset
+
+# Configure MinIO as a DVC remote
+dvc remote add -d yacht-s3 s3://yacht-dvc-storage/yacht-dataset
+dvc remote modify yacht-s3 endpointurl http://localhost:9000
+dvc remote modify yacht-s3 access_key_id minioadmin
+dvc remote modify yacht-s3 secret_access_key minioadmin
+dvc remote modify yacht-s3 use_ssl false
+
+# Push data to the remote bucket
+dvc push
+
+# Commit DVC tracking files to Git
+git add .dvc/config .gitignore minio-data/yacht-dataset.dvc
+git commit -m "Track dataset with DVC and configure MinIO remote"
+git push
+```
+
+This setup allows you to version, share, and reproduce your dataset using DVC and MinIO.
+
 ## How to Launch the Annotation Platform
 
 1. **Clone the repository and enter the project directory:**

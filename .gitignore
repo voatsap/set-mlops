@@ -1,0 +1,2 @@
+# Ignore MinIO storage data
+minio-data/

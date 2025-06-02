@@ -1,0 +1,6 @@
+outs:
+- md5: 518fbfec75574b2345bbfcdfbb6597a2.dir
+  size: 1543816
+  nfiles: 18
+  hash: md5
+  path: yacht-dataset

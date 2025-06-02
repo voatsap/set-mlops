@@ -57,8 +57,8 @@ This setup allows you to version, share, and reproduce your dataset using DVC an
 
 1. **Clone the repository and enter the project directory:**
    ```sh
-   git clone https://github.com/voa/mlops.git
-   cd mlops
+   git clone https://github.com/voa/set-mlops.git
+   cd set-mlops
    ```
 
 2. **Start the annotation stack with Docker Compose:**

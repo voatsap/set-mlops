@@ -3,14 +3,23 @@
 ## Project Structure
 
 ```
-mlops/
-├── docker-compose.yml
-├── mydata/                # Label Studio data (annotations, projects)
-├── minio-data/            # MinIO S3-compatible storage data
-├── postgres-data/         # PostgreSQL database data
-├── docs/
-└── README.md
+set-mlops/
+├── docker-compose.yml         # Docker Compose stack for Label Studio, MinIO, PostgreSQL
+├── mydata/                    # Label Studio data (annotation projects, exports)
+├── minio-data/                # MinIO S3-compatible object storage (ignored by Git)
+├── postgres-data/             # PostgreSQL database data (ignored by Git)
+├── docs/                      # Documentation and images
+├── .dvc/                      # DVC configuration and cache
+├── .gitignore                 # Git ignore rules (excludes data, includes DVC metadata)
+├── README.md                  # Project documentation
+└── minio-data/yacht-dataset.dvc # DVC tracking file for the dataset (tracked by Git)
 ```
+
+## Project Demo Video
+
+Watch a walkthrough of the annotation and dataset versioning workflow on Loom:
+
+[Loom Video Demo](https://www.loom.com/share/3f039bdc6fb04d45915bdfafa2d57be0)
 
 ## Annotation Tool
 

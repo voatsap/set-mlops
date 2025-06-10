@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ray-consolidated-service-lb
+  namespace: shalb-mlops
+  annotations:
+    service.nlb.kube-dc.com/bind-on-default-gw-eip: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    # These selectors match the Ray head pod labels
+    ray.io/cluster: raycluster-raycluster-kuberay
+    ray.io/node-type: head
+    app.kubernetes.io/name: kuberay
+  ports:
+    - name: ray-client
+      protocol: TCP
+      port: 10001
+      targetPort: 10001
+    - name: ray-dashboard
+      protocol: TCP
+      port: 8265
+      targetPort: 8265
+    - name: ray-serve
+      protocol: TCP
+      port: 8000
+      targetPort: 8000

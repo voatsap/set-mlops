@@ -1,0 +1,43 @@
+nameOverride: "raycluster-kuberay"
+namespace: shalb-mlops
+
+# Ray version to use
+rayVersion: "2.41.0"
+
+# Use Python 3.10 container image
+image:
+  repository: rayproject/ray
+  tag: 2.41.0-py310
+
+# Ray cluster configuration
+head:
+  # Head group template
+  rayStartParams:
+    # Enable dashboard on all interfaces
+    dashboard-host: "0.0.0.0"
+    # IMPORTANT: Enable Ray client server on port 10001
+    include-dashboard: "true"
+    ray-client-server-port: "10001"
+  
+  # Container resources
+  resources:
+    limits:
+      cpu: "2"
+      memory: "4G"
+    requests:
+      cpu: "1"
+      memory: "2G"
+
+# Worker group configuration  
+worker:
+  # Number of worker nodes
+  replicas: 1
+  
+  # Worker resources
+  resources:
+    limits:
+      cpu: "4"
+      memory: "8G"
+    requests:
+      cpu: "2"
+      memory: "4G"

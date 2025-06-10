@@ -106,3 +106,58 @@ The annotated data will be used for:
   docker-compose down
   ```
 - Make sure to back up your `mydata/`, `minio-data/`, and `postgres-data/` folders to preserve your work.
+
+## YOLO Object Detection on Ray
+
+This project includes a complete solution for training and serving YOLOv8 object detection models using Ray on a Kubernetes cluster.
+
+### Training YOLO Models
+
+The [`yolo-cpu/train`](yolo-cpu/train) directory contains scripts for training YOLOv8 models using Ray distributed computing:
+
+- **Scripts**:
+  - [`train_yolo.py`](yolo-cpu/train/train_yolo.py) - Core training script with W&B integration
+  - [`ray_job.py`](yolo-cpu/train/ray_job.py) - Ray job definition for distributed training
+  - [`submit_job.py`](yolo-cpu/train/submit_job.py) - Submit training jobs to Ray cluster
+
+- **Usage**:
+  ```bash
+  cd yolo-cpu/train
+  python submit_job.py --ray-address ray://167.235.85.116:10001
+  ```
+
+- **Documentation**: For detailed information, see [yolo-cpu/train/README.md](yolo-cpu/train/README.md)
+
+### Serving YOLO Models
+
+The [`yolo-cpu/serve`](yolo-cpu/serve) directory contains scripts for deploying trained models with Ray Serve:
+
+- **Scripts**:
+  - [`serve_yolo.py`](yolo-cpu/serve/serve_yolo.py) - Ray Serve application for YOLO inference
+  - [`simple_deploy.py`](yolo-cpu/serve/simple_deploy.py) - Deployment script for Ray cluster
+  - [`client.py`](yolo-cpu/serve/client.py) - Test client for sending images and visualizing predictions
+
+- **Usage**:
+  ```bash
+  # Deploy the model
+  cd yolo-cpu/serve
+  python simple_deploy.py --ray-address ray://167.235.85.116:10001
+  
+  # Test the model
+  python client.py --url http://167.235.85.116:8000 --image test.jpg
+  ```
+
+- **API Endpoint**: http://167.235.85.116:8000
+- **Dashboard**: http://167.235.85.116:8265
+
+- **Documentation**: For detailed information, see [yolo-cpu/serve/README.md](yolo-cpu/serve/README.md)
+
+### Ray Infrastructure
+
+The Ray cluster is deployed in the `shalb-mlops` Kubernetes namespace using Helm. The cluster consists of a head node and worker nodes, exposed via a LoadBalancer service that consolidates all required ports:
+
+- Port `10001` - Ray Client API
+- Port `8265` - Ray Dashboard 
+- Port `8000` - Ray Serve API for model inference
+
+Infrastructure configuration files are located in the [`infra/`](infra) directory.

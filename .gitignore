@@ -2,3 +2,9 @@
 minio-data/*
 minio-data/.*/
 !minio-data/yacht-dataset.dvc
+*.env
+*__pycache__
+yolo-cpu/train/setuniversity-mlops-s25
+yolo-cpu/train/wandb
+yolo-cpu/datasets
+yolo-cpu/train/yolov8n.pt
